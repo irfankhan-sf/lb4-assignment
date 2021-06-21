@@ -1,6 +1,9 @@
+import * as dotenv from 'dotenv';
 import {ApplicationConfig, Lb4AssignmentApplication} from './application';
 
 export * from './application';
+
+dotenv.config();
 
 export async function main(options: ApplicationConfig = {}) {
   const app = new Lb4AssignmentApplication(options);
