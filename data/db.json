@@ -1,0 +1,11 @@
+{
+  "ids": {
+    "User": 3
+  },
+  "models": {
+    "User": {
+      "1": "{\"first_name\":\"tom\",\"middle_name\":\"jerry\",\"last_name\":\"khan\",\"email\":\"tom@gmail.com\",\"phone_number\":\"999989899998\",\"role\":0,\"address\":\"eafafaefafafafe eafafknaef man e dnnfe aefnknfen\",\"created_at\":\"2021-06-21T12:39:52.530Z\",\"updated_at\":\"2021-06-21T12:39:52.530Z\",\"id\":1}",
+      "2": "{\"first_name\":\"tom\",\"middle_name\":\"jerry\",\"last_name\":\"khan\",\"email\":\"tom@gmail.com\",\"phone_number\":\"999989899998\",\"role\":0,\"address\":\"eafafaefafafafe eafafknaef man e dnnfe aefnknfen\",\"created_at\":\"2021-06-21T12:39:52.530Z\",\"updated_at\":\"2021-06-21T12:39:52.530Z\",\"id\":2}"
+    }
+  }
+}

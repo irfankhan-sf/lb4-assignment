@@ -10,6 +10,7 @@ import {
   Send,
   SequenceHandler,
 } from '@loopback/rest';
+import {LoggerService} from '../services/index';
 
 const SequenceActions = RestBindings.SequenceActions;
 
@@ -27,22 +28,18 @@ export class AllowedOriginSequence implements SequenceHandler {
     @inject(SequenceActions.INVOKE_METHOD) protected invoke: InvokeMethod,
     @inject(SequenceActions.SEND) public send: Send,
     @inject(SequenceActions.REJECT) public reject: Reject,
+    @inject('services.LoggerService') private log: LoggerService,
   ) {}
-
-  logWithTime(data: string) {
-    const currentDate = '[' + new Date().toUTCString() + '] ';
-    console.log(currentDate, data);
-  }
 
   async handle(context: RequestContext) {
     try {
-      this.logWithTime('Start Time');
+      this.log.info('Start Time');
 
       const {request, response} = context;
 
-      console.log('referer : ', request.headers['referer']);
-      console.log('user agent : ', request.headers['user-agent']);
-      console.log('request ip : ', request.ip);
+      this.log.info('referer : ' + request.headers['referer']);
+      this.log.info('user agent : ' + request.headers['user-agent']);
+      this.log.info('request ip : ' + request.ip);
 
       const allowedOrigin: string[] = (process.env.ALLOWED_ORIGIN ?? '')
         .split(',')
@@ -63,11 +60,11 @@ export class AllowedOriginSequence implements SequenceHandler {
       const args = await this.parseParams(request, route);
       const result = await this.invoke(route, args);
 
-      this.logWithTime('Completion Time');
+      this.log.info('Completion Time');
 
       this.send(response, result);
     } catch (err) {
-      this.logWithTime('Error Time');
+      this.log.error('Error Time', {err});
       console.error(err);
 
       this.reject(context, err);

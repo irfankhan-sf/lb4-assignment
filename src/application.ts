@@ -4,13 +4,12 @@ import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent
+  RestExplorerComponent,
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
-import {AllowedOriginSequence} from "./sequences/allowed-origin.sequence";
-
+import {LoggerService} from './services';
 export {ApplicationConfig};
 
 export class Lb4AssignmentApplication extends BootMixin(
@@ -19,9 +18,10 @@ export class Lb4AssignmentApplication extends BootMixin(
   constructor(options: ApplicationConfig = {}) {
     super(options);
 
+    this.service(LoggerService);
     // Set up the custom sequence
     this.sequence(MySequence);
-    this.sequence(AllowedOriginSequence);
+    // this.sequence(AllowedOriginSequence);
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
